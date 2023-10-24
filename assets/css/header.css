@@ -1,0 +1,23 @@
+body {
+  max-width: 1440px;
+  margin: auto;
+}
+li a {
+  text-decoration: none;
+  color: black;
+}
+li {
+  list-style-type: none;
+  padding-left: 30px;
+}
+#menu-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 100px;
+  padding-top: 15px;
+}
+img.custom-logo {
+  position: absolute;
+  padding-top: 15px;
+  padding-left: 100px;
+}
