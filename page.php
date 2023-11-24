@@ -9,17 +9,40 @@
  * @since Twenty Twenty-One 1.0
  */
 
-get_header();
+get_header();?>
 
-/* Start the Loop */
-while ( have_posts() ) :
-	the_post();
-	get_template_part( 'template-parts/content/content-page' );
+<div class="galerie">
 
-	// If comments are open or there is at least one comment, load up the comment template.
-	if ( comments_open() || get_comments_number() ) {
-		comments_template();
-	}
-endwhile; // End of the loop.
+<?php
+$args = array(
+    'post_type' => 'photo', 
+    'posts_per_page' => 8, 
+	'orderby' => 'rand',
+);
 
+$query = new WP_Query($args);
+
+// The Loop
+if ($query->have_posts()) {
+    while ($query->have_posts()) {
+        $query->the_post();
+        ?>
+
+        
+        <div class="content">
+            <?php the_content(); ?>
+        </div>
+
+        <?php
+    }
+} else {
+
+    echo 'Aucune photo trouvé.';
+}
+
+wp_reset_postdata();?>
+</div>
+
+<?php
 get_footer();
+?>

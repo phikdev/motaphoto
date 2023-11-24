@@ -1,4 +1,27 @@
-#menu-footer {
+footer {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+}
+#menu-footer {
+  width: 620px;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 425px) {
+  #menu-footer {
+    flex-direction: column;
+    height: 208px;
+  }
+  #menu-footer li a {
+    display: flex;
+    justify-content: center;
+    font-weight: 400;
+    padding-top: 5px;
+    margin-bottom: 30px;
+  }
+}
+#ligne {
+  border-top: 1px black solid;
+  width: 100%;
 }

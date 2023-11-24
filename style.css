@@ -7,3 +7,10 @@ Version: 1.0
 Tags: Motaphoto, photo, event
 Text Domain: Motaphoto
 */
+
+@import url("./assets/css/header.css");
+@import url("./assets/css/footer.css");
+@import url("./assets/css/fonts.css");
+@import url("./assets/css/modale.css");
+@import url("./assets/css/general.css");
+@import url("./assets/css/single.css");

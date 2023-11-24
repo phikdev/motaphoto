@@ -1,50 +1,75 @@
-<?php
-/**
- * The template for displaying all single posts
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
- *
- * @package WordPress
- * @subpackage Twenty_Twenty_One
- * @since Twenty Twenty-One 1.0
- */
-
+<!-- declaration des variables -->
+<?php 
+$categorie = get_the_terms( get_the_ID(), 'categorie' );
+$format = get_the_terms( get_the_ID(), 'format' );
+?>
+<?php 
 get_header();
+?>
+<main>
+	<section id="single">
+ 	<div id ="bloc-description">
+		<div id="ref">
+			<h1 id="titre"><?php the_title()?><h1>
+			<h4 id ="description"> RÉfÉRENCE :<span id="data-ref"> <?php echo get_field ('reference');?></span></h4>
+			<h4 id ="description">CATÉGORIE : <?php echo $categorie[0]->name;?></h4>
+			<h4 id ="description">FORMAT : <?php echo $format[0]->name;?></h4>
+			<h4 id ="description">TYPE : <?php echo get_field ('type');?></h4>
+			<h4 id ="description">ANNÉE : <?php echo get_the_date('Y') ?></h4>
+		</div>
+	</div>
+	
+	<div id="bloc-image">
+	<img id="photo" src="<?php echo get_the_post_thumbnail_url() ?>" alt="Photo" > 
+	</div>
+</section>
 
-/* Start the Loop */
-while ( have_posts() ) :
-	the_post();
 
-	get_template_part( 'template-parts/content/content-single' );
+<section>
+	<div id="trait"></div>
+<div id="suggestion">
+		<p>Cette photo vous intéresse ?</p>
+		<button class="btn2" id="btn" type="button">Contact</button>
+		<div id="selection">
+			<div id="small">
+				<span class="previous"><?php echo get_the_post_thumbnail(get_previous_post()) ?></span>
+				<span class="next"><?php echo get_the_post_thumbnail(get_next_post()) ?></span>
+			</div>
+		
+			<div id="fleche">
+			<?php if (get_previous_post()):?>
+			<a href="<?php echo get_the_permalink(get_previous_post())?>">
+			<img id="left" src="<?php echo get_stylesheet_directory_uri(get_previous_post()).'/assets/images/left.png' ?>">
+			</a>
+			<?php endif;?>
+			<?php if (get_next_post()):?>
+			<a href=" <?php echo get_the_permalink(get_next_post())?>">
+			<img id="right" src="<?php echo get_theme_file_uri('assets/images/right.png') ?>">
+			</a>
+		
+			<?php endif;?>
+		</div>
+		
+	</div>
+</div>
+</section>
+<section id="autre">
+<div id="ligne"></div>
+<h2>Vous aimerez aussi</h2>
+<div id="parent">
 
-	if ( is_attachment() ) {
-		// Parent post navigation.
-		the_post_navigation(
-			array(
-				/* translators: %s: Parent post link. */
-				'prev_text' => sprintf( __( '<span class="meta-nav">Published in</span><span class="post-title">%s</span>', 'twentytwentyone' ), '%title' ),
-			)
-		);
-	}
+	<?php get_template_part('/templates_part/photo_bloc');?>
+	<div id="load">
+		<a href="motaphoto/accueil">
+		<button id="btn2" type="button">Toutes les photos</button>
+		</a>
+	</div>
+</div>
+</section>
+</main>
 
-	// If comments are open or there is at least one comment, load up the comment template.
-	if ( comments_open() || get_comments_number() ) {
-		comments_template();
-	}
 
-	// Previous/next post navigation.
-	$twentytwentyone_next = is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' );
-	$twentytwentyone_prev = is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' );
 
-	$twentytwentyone_next_label     = esc_html__( 'Next post', 'twentytwentyone' );
-	$twentytwentyone_previous_label = esc_html__( 'Previous post', 'twentytwentyone' );
+<?php
+get_footer();?>
 
-	the_post_navigation(
-		array(
-			'next_text' => '<p class="meta-nav">' . $twentytwentyone_next_label . $twentytwentyone_next . '</p><p class="post-title">%title</p>',
-			'prev_text' => '<p class="meta-nav">' . $twentytwentyone_prev . $twentytwentyone_previous_label . '</p><p class="post-title">%title</p>',
-		)
-	);
-endwhile; // End of the loop.
-
-get_footer();

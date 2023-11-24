@@ -1,0 +1,8 @@
+body {
+  max-width: 1440px;
+  margin: auto;
+}
+li a {
+  text-decoration: none;
+  color: black;
+}

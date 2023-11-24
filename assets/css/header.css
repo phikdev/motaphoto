@@ -1,23 +1,81 @@
-body {
-  max-width: 1440px;
-  margin: auto;
-}
-li a {
-  text-decoration: none;
-  color: black;
-}
-li {
-  list-style-type: none;
-  padding-left: 30px;
-}
 #menu-header {
   display: flex;
   justify-content: flex-end;
-  margin-right: 100px;
-  padding-top: 15px;
+
+  padding-top: 26px;
 }
 img.custom-logo {
   position: absolute;
-  padding-top: 15px;
-  padding-left: 100px;
+  padding-top: 30px;
+}
+/*header.css*/
+#menu-header li {
+  list-style-type: none;
+  padding-left: 30px;
+}
+header {
+  box-shadow: 0px 4px 14px 10px #00000008;
+  height: 80px;
+  margin-top: -14px;
+}
+#nav {
+  width: 1148px;
+  margin: auto;
+}
+li {
+  list-style-type: none;
+}
+
+#icons::before {
+  content: url(../images/Menu.png);
+  display: none;
+}
+.active #icons:before {
+  content: url(../images/Menux.png);
+}
+#mobile ul {
+  position: absolute;
+  left: -10000px;
+  font-size: 44px;
+  font-weight: 400;
+  text-transform: uppercase;
+  flex-direction: column;
+  background: #e00000;
+  width: 100vw;
+  height: 100%;
+  text-align: center;
+  transition: 0.5s;
+}
+#mobile li a {
+  color: white;
+}
+#first {
+  padding-top: 150px;
+}
+#mobile li {
+  margin-top: 30px;
+  padding-right: 30px;
+}
+#mobile.active ul {
+  left: 0;
+  top: 100px;
+  height: 100%;
+}
+@media (max-width: 768px) {
+  #icons::before {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 37.55px;
+    padding-right: 7%;
+  }
+
+  #menu-item-15,
+  #menu-item-16,
+  #menu-item-40 {
+    display: none;
+  }
+  img.custom-logo {
+    padding-left: 25px;
+    padding-top: 40px;
+  }
 }
