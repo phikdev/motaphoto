@@ -6,3 +6,9 @@ li a {
   text-decoration: none;
   color: black;
 }
+#btn:hover,
+#btn2:hover {
+  background-color: black;
+  color: white;
+  transition: 0.4s;
+}

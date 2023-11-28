@@ -7,6 +7,9 @@ footer {
   display: flex;
   justify-content: space-between;
 }
+#menu-footer li:hover {
+  font-weight: 700;
+}
 
 @media (max-width: 425px) {
   #menu-footer {

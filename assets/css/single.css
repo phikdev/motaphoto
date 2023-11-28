@@ -2,14 +2,9 @@ main {
   width: 1148px;
   margin: auto;
 }
-#titre {
-  font-size: 66px;
 
-  color: black;
-  font-style: italic;
-  font-weight: 400;
-  font-family: "Space Mono", monospace;
-  text-transform: uppercase;
+#single {
+  display: flex;
 }
 #description {
   font-family: "Space Mono", monospace;
@@ -17,10 +12,20 @@ main {
   font-size: 14px;
   text-transform: uppercase;
 }
-
-#single {
-  display: flex;
+#ref {
+  position: absolute;
+  bottom: 30px;
+  width: 420px;
 }
+#titre {
+  font-size: 66px;
+  color: black;
+  font-style: italic;
+  font-weight: 400;
+  font-family: "Space Mono", monospace;
+  text-transform: uppercase;
+}
+
 #photo {
   object-fit: cover;
   width: 100%;
@@ -77,6 +82,7 @@ p {
 #right {
   width: 25px;
 }
+
 #right {
   padding-left: 27px;
 }
@@ -114,21 +120,20 @@ p {
 .btn2 {
   cursor: pointer;
 }
-#ref {
-  position: absolute;
-  padding-top: 205px;
-  width: 420px;
-}
+
 #photo-galerie img {
   width: 564px;
   height: 495px;
   object-fit: cover;
+}
+#photo-galerie img:hover {
 }
 #photo-galerie {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
 }
+
 .pevious {
   display: block;
 }
@@ -141,4 +146,15 @@ a {
 
 #parent {
   display: block;
+}
+
+/* responsive */
+@media (max-width: 375px) {
+  main {
+    width: 375px;
+    margin: auto;
+  }
+  #single {
+    display: block;
+  }
 }

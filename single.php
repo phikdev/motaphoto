@@ -59,6 +59,7 @@ get_header();
 <div id="parent">
 
 	<?php get_template_part('/templates_part/photo_bloc');?>
+	
 	<div id="load">
 		<a href="motaphoto/accueil">
 		<button id="btn2" type="button">Toutes les photos</button>

@@ -11,12 +11,32 @@
 
 get_header();?>
 
+
+<div class="photoHero">
+<h1 id="titre"><?php the_title()?><h1>
+                <?php
+                $args = array(
+                    'post_type' => 'photo',
+                    'posts_per_page' => 1,
+                    'orderby' => 'rand',
+                );
+
+                $loop = new WP_Query($args);
+
+                while ($loop->have_posts()) : $loop->the_post();
+                    the_post_thumbnail();
+                endwhile;
+                wp_reset_postdata();
+                ?>
+                
+            </div>
+
 <div class="galerie">
 
 <?php
 $args = array(
     'post_type' => 'photo', 
-    'posts_per_page' => 8, 
+    'posts_per_page' => 12, 
 	'orderby' => 'rand',
 );
 

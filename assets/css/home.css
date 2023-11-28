@@ -1,0 +1,28 @@
+.photoHero img {
+  width: 1440px;
+  height: 966px;
+  object-fit: cover;
+}
+.photoHero {
+  padding-bottom: 100px;
+}
+.galerie {
+  width: 1118px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.content {
+  width: 49.3%;
+}
+.galerie img {
+  width: 564px;
+  height: 495px;
+  object-fit: cover;
+}
+
+/* responsive */
+@media (max-width: 375px) {
+}
