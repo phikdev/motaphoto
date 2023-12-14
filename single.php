@@ -11,7 +11,7 @@ get_header();
  	<div id ="bloc-description">
 		<div id="ref">
 			<h1 id="titre"><?php the_title()?><h1>
-			<h4 id ="description"> RÉfÉRENCE :<span id="data-ref"> <?php echo get_field ('reference');?></span></h4>
+			<h4 id ="description"> RÉfÉRENCE :<span class="data-ref"> <?php echo get_field ('reference');?></span></h4>
 			<h4 id ="description">CATÉGORIE : <?php echo $categorie[0]->name;?></h4>
 			<h4 id ="description">FORMAT : <?php echo $format[0]->name;?></h4>
 			<h4 id ="description">TYPE : <?php echo get_field ('type');?></h4>
@@ -39,12 +39,12 @@ get_header();
 			<div id="fleche">
 			<?php if (get_previous_post()):?>
 			<a href="<?php echo get_the_permalink(get_previous_post())?>">
-			<img id="left" src="<?php echo get_stylesheet_directory_uri(get_previous_post()).'/assets/images/left.png' ?>">
+			<img id="left" src="<?php echo get_stylesheet_directory_uri(get_previous_post()).'/assets/images/left.png' ?>"/>
 			</a>
 			<?php endif;?>
 			<?php if (get_next_post()):?>
 			<a href=" <?php echo get_the_permalink(get_next_post())?>">
-			<img id="right" src="<?php echo get_theme_file_uri('assets/images/right.png') ?>">
+			<img id="right" src="<?php echo get_theme_file_uri('assets/images/right.png') ?>"/>
 			</a>
 		
 			<?php endif;?>

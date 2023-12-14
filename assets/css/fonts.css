@@ -3,6 +3,7 @@
 li {
   font-family: "Space Mono", monospace;
 }
-form {
+form,
+select {
   font-family: "Poppins", sans-serif;
 }

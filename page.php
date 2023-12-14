@@ -9,11 +9,21 @@
  * @since Twenty Twenty-One 1.0
  */
 
-get_header();?>
+
+
+
+defined( 'ABSPATH' ) || exit;
+
+get_header();
+
+
+$container = get_theme_mod('understrap_container_type');
+
+?>
 
 
 <div class="photoHero">
-<h1 id="titre"><?php the_title()?><h1>
+        <h1 id="titre-header"><img src="<?php echo get_stylesheet_directory_uri().'/assets/images/Titre-header.png' ?>" alt=""><h1>
                 <?php
                 $args = array(
                     'post_type' => 'photo',
@@ -29,22 +39,84 @@ get_header();?>
                 wp_reset_postdata();
                 ?>
                 
-            </div>
+</div>
+    
 
 <div class="galerie">
 
-<?php
-$args = array(
-    'post_type' => 'photo', 
-    'posts_per_page' => 12, 
-	'orderby' => 'rand',
-);
+    <div id="selectAll">
+        <div id="select1">  
+            <?php
+			$categories = get_terms( // you can use get_categories() function as well
+				array(
+					// you can replace the taxonomy parameter value with any custom taxonomy name or 'post_tag'
+					'taxonomy' => 'categorie',
+					'orderby' => 'name',
+				) 
+			);
+            
+            if( $categories ) :
+				?>
+					<select id="category-filter">
+						<option value="">CATEGORIES</option>
+						<?php
+							foreach ( $categories as $category ) :
+								?><option value="<?php echo $category->term_id ?>"><?php echo $category->name ?></option><?php
+							endforeach;
+						?>
+					</select>
+				<?php
+			endif;
+		        ?>
+            </select>
+            <?php
+			$formats = get_terms( // you can use get_categories() function as well
+				array(
+					// you can replace the taxonomy parameter value with any custom taxonomy name or 'post_tag'
+					'taxonomy' => 'format',
+					'orderby' => 'name',
+				) 
+			);
+            if( $formats ) :
+				?>
+					<select class="formats" id="format-filter">
+						<option value="">FORMATS</option>
+						<?php
+							foreach ( $formats as $category ) :
+								?><option value="<?php echo $category->term_id ?>"><?php echo $category->name ?></option><?php
+							endforeach;
+						?>
+					</select>
+				<?php
+			endif;
+		        ?>
+            </select>
+            
 
-$query = new WP_Query($args);
 
-// The Loop
-if ($query->have_posts()) {
-    while ($query->have_posts()) {
+        </div> 
+
+        <div id="select2">
+    <select id="date-filter">
+        <option value="">TRIER PAR</option>
+        <option value="ASC">Les plus récentes</option>
+        <option value="DESC">Les plus anciennes</option>
+    </select>
+</div>
+    </div>
+    <div id="posts-container">
+        <?php
+        $args = array(
+            'post_type' => 'photo', 
+            'posts_per_page' => 12, 
+	        'orderby' => 'rand',
+        );
+
+        $query = new WP_Query($args);
+
+        // The Loop
+        if ($query->have_posts()) {
+        while ($query->have_posts()) {
         $query->the_post();
         ?>
 
@@ -54,15 +126,19 @@ if ($query->have_posts()) {
         </div>
 
         <?php
-    }
-} else {
+             }
+        } else {
 
-    echo 'Aucune photo trouvé.';
-}
+        echo 'Aucune photo trouvé.';
+        }
 
-wp_reset_postdata();?>
+        wp_reset_postdata();?>
+    </div>    
 </div>
 
+<a href="motaphoto/accueil">
+		<button id="btn2" type="button">Toutes les photos</button>
+		</a>
 <?php
 get_footer();
 ?>

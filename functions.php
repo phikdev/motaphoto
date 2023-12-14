@@ -77,4 +77,97 @@ function themename_custom_logo_setup() {
   add_filter('wp_nav_menu_items', 'add_search_form', 10, 2);
 
 
+  
+// Fonction dans functions.php pour récupérer les url des thumbnail des posts par catégorie
+// function get_thumbnails_by_category() {
+
+//   $category_id = $_GET['category_id'];//Recupere l'id de la catégorie du select
+  
+//  //Prépare la requete sql
+//   $args = array(
+//       'cat' => $category_id,
+//       'post_type' => 'post',
+//       'posts_per_page' => -1,
+//   );
+
+//   $query = new WP_Query($args);
+
+//   $thumbnails = array();
+
+//   if ($query->have_posts()) {
+
+//       while ($query->have_posts()) {//Boucle de tous les Posts
+
+//           $query->the_post();
+
+//           $thumbnail_id = get_post_thumbnail_id();
+//           $thumbnail_url = wp_get_attachment_image_src($thumbnail_id, 'full')[0];//Récupere l'url des thumbnail grâce aux id
+
+//           $thumbnails[] = $thumbnail_url;//Insere chaque url thumbnail de chaque post dans le tableau
+//       }
+//   }
+
+//   wp_reset_postdata();
+
+//   echo json_encode($thumbnails);
+
+//   die(); // Stop l'exécution après la sortie JSON
+// }
+
+// add_action('wp_ajax_get_thumbnails_by_category', 'get_thumbnails_by_category');
+// add_action('wp_ajax_nopriv_get_thumbnails_by_category', 'get_thumbnails_by_category');
+
+
+    /*test2*/
+    function filter_photos() {
+      $category = $_POST['category'];
+      $format = $_POST['format'];
+      $order = $_POST['order'];
+  
+      $args = array(
+          'post_type' => 'photo',
+          'posts_per_page' => -1, //12?
+          'orderby' => 'date',
+        'order' => $order ? $order : 'DESC'
+      );
+  
+      // Ajoutez des conditions de filtrage si des filtres sont sélectionnés
+      if($category) {
+          $args['tax_query'][] = array(
+              'taxonomy' => 'categorie',
+              'field'    => 'term_id',
+              'terms'    => $category
+          );
+      }
+  
+      if($format) {
+          $args['tax_query'][] = array(
+              'taxonomy' => 'format',
+              'field'    => 'term_id',
+              'terms'    => $format
+          );
+      }
+  
+      $query = new WP_Query($args);
+  
+      if ($query->have_posts()) {
+          while ($query->have_posts()) {
+              $query->the_post();
+              // Générez et affichez chaque post
+              ?>
+              <div class="content">
+                  <?php the_content(); ?>
+              </div>
+              <?php
+          }
+      } else {
+          echo 'Aucune photo trouvée.';
+      }
+  
+      wp_die();
+  }
+  
+  add_action('wp_ajax_filter_photos', 'filter_photos');
+  add_action('wp_ajax_nopriv_filter_photos', 'filter_photos');
+  
     
