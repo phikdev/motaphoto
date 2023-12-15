@@ -128,7 +128,7 @@ function themename_custom_logo_setup() {
           'post_type' => 'photo',
           'posts_per_page' => -1, //12?
           'orderby' => 'date',
-        'order' => $order ? $order : 'DESC'
+          'order' => $order ? $order : 'DESC'
       );
   
       // Ajoutez des conditions de filtrage si des filtres sont sélectionnés
@@ -171,3 +171,40 @@ function themename_custom_logo_setup() {
   add_action('wp_ajax_nopriv_filter_photos', 'filter_photos');
   
     
+
+
+
+  function load_more_photos_ajax() {
+    // Vérifiez et obtenez la page actuelle
+    $paged = isset($_POST['paged']) ? $_POST['paged'] : 1;
+    $paged++; // Incrémente pour obtenir la page suivante
+
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => 8,
+        'paged' => $_POST['paged'],
+        'orderby' => 'date',
+	    'order' => $_POST['post_ordre'],
+       
+       
+    );
+
+    // WP_Query
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $post = get_post();
+            ?>
+            <div class="content">
+                <?php the_content(); ?>
+            </div>
+            <?php
+        }
+    }
+    wp_die();
+}
+
+add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos_ajax');
+add_action('wp_ajax_load_more_photos', 'load_more_photos_ajax');

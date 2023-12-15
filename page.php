@@ -122,6 +122,7 @@ $container = get_theme_mod('understrap_container_type');
 
         
         <div class="content">
+        <!-- <img id="left" src="<?php echo get_stylesheet_directory_uri().'/assets/images/fullscreen.png' ?>"/> -->
             <?php the_content(); ?>
         </div>
 
@@ -136,9 +137,25 @@ $container = get_theme_mod('understrap_container_type');
     </div>    
 </div>
 
-<a href="motaphoto/accueil">
+
 		<button id="btn2" type="button">Toutes les photos</button>
-		</a>
+		
 <?php
 get_footer();
 ?>
+<script>
+    var page = 1; // Compteur de page initial
+
+document.getElementById('btn2').addEventListener('click', function() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '<?php echo admin_url("admin-ajax.php"); ?>', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function() {
+        if (this.status === 200) {
+            document.getElementById('posts-container').innerHTML += this.responseText;
+            page++;
+        }
+    };
+    xhr.send('action=load_more_photos&page=' + page);
+});
+</script>

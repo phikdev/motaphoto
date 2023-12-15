@@ -60,7 +60,24 @@ select {
   display: flex;
   justify-content: end;
 }
-
+option {
+  background-color: white;
+}
+option:nth-child(1) {
+  background: white;
+}
+option:nth-child(2) {
+  background: white;
+}
+option:nth-child(3) {
+  background: #ffd6d6;
+}
+option:nth-child(4) {
+  background: #fe5858;
+}
+option:nth-child(5) {
+  background: #e00000;
+}
 /* responsive */
 @media (max-width: 375px) {
 }
