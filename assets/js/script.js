@@ -29,105 +29,52 @@ btn.addEventListener('click', function(){
   console.log('afficher modale');
 });
 
-//   // TEST
-//   document.addEventListener("DOMContentLoaded", function () {
-
-//     const categorySelect = document.getElementById("cat-select");
-    
-//     const bloggerElt = document.getElementById("blogger");
-
-//     categorySelect.addEventListener("change", function() {
-//         bloggerElt.textContent = '';
-        
-
-//         const categoryId = categorySelect.value;
-        
-//         // Requête AJAX vers la fonction personnalisée
-//         var xhr = new XMLHttpRequest();
-//         xhr.open('GET', '/wp-admin/admin-ajax.php?action=get_thumbnails_by_category&category_id=' + categoryId);
-//         //Declanche la requete ajax côté serveur
-
-//         //Crée un tableau json et le rends dispo coté client
-//         xhr.onload = function() {
-//             if (xhr.status === 200) {
-              
-//                 // La réponse est au format JSON
-//                 var thumbnails = JSON.parse(xhr.responseText);
-//                 console.log(thumbnails);
-
-//                 thumbnails.forEach((thumbnail_url) => {
-//                   console.log('reponse');
-//                     const divElt = document.createElement('div');
-//                     divElt.classList.add('divImg');
-
-//                     const imgElt = document.createElement('img');
-//                     imgElt.src = thumbnail_url;
-
-//                     divElt.appendChild(imgElt);
-//                     bloggerElt.appendChild(divElt);
-//                 });
-//             } else {
-//                 console.error('Erreur lors de la requête AJAX');
-//             }
-//         }
-
-//         xhr.send();
-//     });
-// });
 
 
 
-
-
-/*test2*/
-
+/*FILTRES*/
 
 document.addEventListener('DOMContentLoaded', function () {
-    function updatePosts() {
-        var category = document.getElementById('category-filter').value;
-        var format = document.querySelector('.formats').value;
-        var order = document.getElementById('date-filter').value;
+  function updatePosts() {
+      var category = document.getElementById('category-filter').value;
+      var format = document.querySelector('.formats').value;
+      var order = document.getElementById('date-filter').value;
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/wp-admin/admin-ajax.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onload = function() {
-            if (this.status == 200) {
-                document.getElementById('posts-container').innerHTML = this.responseText;
-            }
-        };
-        xhr.send('action=filter_photos&category=' + category + '&format=' + format + '&order=' + order);
-    }
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/wp-admin/admin-ajax.php', true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.onload = function() {
+          if (this.status == 200) {
+              document.getElementById('posts-container').innerHTML = this.responseText;
+          }
+      };
+      xhr.send('action=filter_photos&category=' + category + '&format=' + format + '&order=' + order);
+  }
 
-    document.getElementById('category-filter').addEventListener('change', updatePosts);
-    document.querySelector('.formats').addEventListener('change', updatePosts);
-    document.getElementById('date-filter').addEventListener('change', updatePosts);
+  document.getElementById('category-filter').addEventListener('change', updatePosts);
+  document.querySelector('.formats').addEventListener('change', updatePosts);
+  document.getElementById('date-filter').addEventListener('change', updatePosts);
 });
 
 
+let currentPage = 1;
+jQuery('#btnL').on('click', function() {
+  currentPage++; // Do currentPage + 1, because we want to load the next page
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  jQuery.ajax({
+    type: 'POST',
+    url: 'wp-admin/admin-ajax.php',
+    dataType: 'html',
+    data: {
+    action: 'weichie_load_more',
+    paged: currentPage,
+    },
+    
+    success: function (res) {
+        jQuery('#posts-container').append(res);
+    }
+  });
+});
 
 
 
@@ -174,7 +121,6 @@ btn2.addEventListener('click', function(){
 
 
 
-
-
   
+
 

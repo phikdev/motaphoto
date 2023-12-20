@@ -4,6 +4,8 @@ li {
   font-family: "Space Mono", monospace;
 }
 form,
-select {
+select,
+.photo-title,
+.photo-category {
   font-family: "Poppins", sans-serif;
 }

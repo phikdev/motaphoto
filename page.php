@@ -23,20 +23,22 @@ $container = get_theme_mod('understrap_container_type');
 
 
 <div class="photoHero">
-        <h1 id="titre-header"><img src="<?php echo get_stylesheet_directory_uri().'/assets/images/Titre-header.png' ?>" alt=""><h1>
+        <h1 id="titre-header">
+            <img src="<?php echo get_stylesheet_directory_uri().'/assets/images/Titre-header.png' ?>" alt="photo-header">
+        <h1>
                 <?php
-                $args = array(
-                    'post_type' => 'photo',
-                    'posts_per_page' => 1,
-                    'orderby' => 'rand',
-                );
+                    $args = array(
+                        'post_type' => 'photo',
+                        'posts_per_page' => 1,
+                        'orderby' => 'rand',
+                    );
 
-                $loop = new WP_Query($args);
+                    $loop = new WP_Query($args);
 
-                while ($loop->have_posts()) : $loop->the_post();
+                    while ($loop->have_posts()) : $loop->the_post();
                     the_post_thumbnail();
-                endwhile;
-                wp_reset_postdata();
+                    endwhile;
+                    wp_reset_postdata();
                 ?>
                 
 </div>
@@ -70,9 +72,9 @@ $container = get_theme_mod('understrap_container_type');
 		        ?>
             </select>
             <?php
-			$formats = get_terms( // you can use get_categories() function as well
+			$formats = get_terms( 
 				array(
-					// you can replace the taxonomy parameter value with any custom taxonomy name or 'post_tag'
+					
 					'taxonomy' => 'format',
 					'orderby' => 'name',
 				) 
@@ -83,79 +85,65 @@ $container = get_theme_mod('understrap_container_type');
 						<option value="">FORMATS</option>
 						<?php
 							foreach ( $formats as $category ) :
-								?><option value="<?php echo $category->term_id ?>"><?php echo $category->name ?></option><?php
+						?>
+                        <option value="<?php echo $category->term_id ?>"><?php echo $category->name ?>
+                        </option>
+                        <?php
 							endforeach;
 						?>
 					</select>
-				<?php
-			endif;
-		        ?>
-            </select>
+				        <?php
+			                endif;
+		                ?>
+                    </select>
             
 
 
         </div> 
 
         <div id="select2">
-    <select id="date-filter">
-        <option value="">TRIER PAR</option>
-        <option value="ASC">Les plus récentes</option>
-        <option value="DESC">Les plus anciennes</option>
-    </select>
-</div>
+            <select id="date-filter">
+                <option value="">TRIER PAR</option>
+                <option value="ASC">Les plus récentes</option>
+                <option value="DESC">Les plus anciennes</option>
+            </select>
+        </div>
     </div>
     <div id="posts-container">
-        <?php
-        $args = array(
-            'post_type' => 'photo', 
-            'posts_per_page' => 12, 
-	        'orderby' => 'rand',
-        );
-
-        $query = new WP_Query($args);
-
-        // The Loop
-        if ($query->have_posts()) {
-        while ($query->have_posts()) {
-        $query->the_post();
+        <?php 
+        $publications = new WP_Query([
+        'post_type' => 'photo',
+        'posts_per_page' => 12,
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'paged' => 1,
+        ]);
         ?>
 
+        <?php if($publications->have_posts()): ?>
         
-        <div class="content">
-        <!-- <img id="left" src="<?php echo get_stylesheet_directory_uri().'/assets/images/fullscreen.png' ?>"/> -->
-            <?php the_content(); ?>
-        </div>
-
-        <?php
-             }
-        } else {
-
-        echo 'Aucune photo trouvé.';
-        }
-
-        wp_reset_postdata();?>
+            <?php 
+            while ($publications->have_posts()): $publications->the_post();
+            get_template_part('templates_part/content');
+            endwhile;
+            ?>
+        
+        <?php endif; ?>
+        <?php wp_reset_postdata(); ?>
     </div>    
 </div>
 
 
-		<button id="btn2" type="button">Toutes les photos</button>
-		
-<?php
-get_footer();
-?>
-<script>
-    var page = 1; // Compteur de page initial
+<button id="btnL" type="button">Toutes les photos</button>
 
-document.getElementById('btn2').addEventListener('click', function() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '<?php echo admin_url("admin-ajax.php"); ?>', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onload = function() {
-        if (this.status === 200) {
-            document.getElementById('posts-container').innerHTML += this.responseText;
-            page++;
-        }
-    };
-    xhr.send('action=load_more_photos&page=' + page);
-});
-</script>
+
+
+		
+        <?php
+        get_footer();
+        ?>
+
+
+
+
+

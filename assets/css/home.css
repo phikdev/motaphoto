@@ -78,6 +78,85 @@ option:nth-child(4) {
 option:nth-child(5) {
   background: #e00000;
 }
+
+.photo-hover-container {
+  position: relative;
+}
+
+.photo-hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.photo-hover-container:hover .photo-hover-overlay {
+  opacity: 1;
+}
+
+.photo-link img {
+  height: 31px;
+  width: 46px;
+  transition: transform 0.3s;
+}
+
+.photo-hover-container:hover .photo-link img {
+  transform: scale(1.2); /* effet de zoom léger au survol */
+}
+.photo-hover-container {
+  position: relative;
+  /* autres styles pour le conteneur de la photo */
+}
+
+.photo-fullscreen-link {
+  display: none; /* Masquer par défaut */
+  position: absolute;
+  top: 10px; /* Ajustez la valeur pour la position exacte */
+  right: 10px; /* Ajustez la valeur pour la position exacte */
+  z-index: 10; /* S'assurer que l'icône est au-dessus de l'image */
+}
+
+.photo-hover-container:hover .photo-fullscreen-link {
+  display: block; /* Afficher l'icône au survol */
+}
+
+.icon-fullscreen {
+  display: block;
+}
+img.icon-fullscreen {
+  width: 30px;
+  height: 30px;
+}
+
+.photo-hover-container:hover .photo-title {
+  display: block; /* Afficher le titre au survol de .photo-hover-container */
+}
+
+.photo-title {
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  text-transform: uppercase;
+  padding: 5px;
+
+  font-size: 14px;
+  font-weight: 500;
+  max-width: 90%; /* Largeur maximale du titre pour éviter de déborder du conteneur de la photo */
+  white-space: nowrap; /* Empêche le texte de passer à la ligne */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Ajoute des points de suspension si le texte déborde */
+  z-index: 5;
+}
+
 /* responsive */
 @media (max-width: 375px) {
 }
