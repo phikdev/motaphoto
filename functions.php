@@ -154,31 +154,36 @@ add_action('wp_ajax_nopriv_request_photo', 'motaphoto_request_photo');
 
 
   function weichie_load_more() {
+    $paged = $_POST['paged'];
     $ajaxposts = new WP_Query([
       'post_type' => 'photo',
       'posts_per_page' => 12,
       'orderby' => 'date',
       'order' => 'DESC',
-      'paged' => $_POST['paged'],
+      'paged' => $paged,
     ]);
-    
 
     $response = '';
-  
-    if($ajaxposts->have_posts()) {
-      while($ajaxposts->have_posts()) : $ajaxposts->the_post();
-        $response .= get_template_part('templates_part/content');
+    if ($ajaxposts->have_posts()) {
+      ob_start();
+      while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
+        get_template_part('templates_part/content');
       endwhile;
-    } else {
-      $response = '';
+      $response = ob_get_clean();
     }
-  
-    echo $response;
+
+    // Déterminer s'il y a plus de posts à charger
+    $more_posts = $paged < $ajaxposts->max_num_pages;
+
+    echo json_encode(array(
+        'html' => $response,
+        'more' => $more_posts // true s'il y a plus de posts, false sinon
+    ));
     exit;
-    
-  }
-  add_action('wp_ajax_weichie_load_more', 'weichie_load_more');
-  add_action('wp_ajax_nopriv_weichie_load_more', 'weichie_load_more');
+}
+add_action('wp_ajax_weichie_load_more', 'weichie_load_more');
+add_action('wp_ajax_nopriv_weichie_load_more', 'weichie_load_more');
+
 
 
 

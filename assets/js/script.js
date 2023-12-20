@@ -58,23 +58,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 let currentPage = 1;
+
 jQuery('#btnL').on('click', function() {
-  currentPage++; // Do currentPage + 1, because we want to load the next page
+  currentPage++;
 
   jQuery.ajax({
     type: 'POST',
     url: 'wp-admin/admin-ajax.php',
-    dataType: 'html',
+    dataType: 'json',
     data: {
-    action: 'weichie_load_more',
-    paged: currentPage,
+      action: 'weichie_load_more',
+      paged: currentPage,
     },
-    
-    success: function (res) {
-        jQuery('#posts-container').append(res);
+    success: function (data) {
+      jQuery('#posts-container').append(data.html);
+      if (!data.more) {
+        jQuery('#btnL').hide(); // Cacher le bouton si toutes les photos sont affichées
+      }
     }
   });
 });
+
 
 
 
