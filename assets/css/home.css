@@ -2,18 +2,26 @@
   width: 1440px;
   height: 966px;
   object-fit: cover;
+
+  display: block; /* Élimine l'espace blanc en dessous de l'image */
 }
 #titre-header {
-  position: absolute;
-  top: 55%;
-  left: 450px;
-  margin: auto;
+  position: absolute; /* Positionnement absolu */
+  top: 44%; /* Centré verticalement */
+  left: 50%; /* Centré horizontalement */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Décalage précis pour un centrage parfait */
+  z-index: 10; /* Assurez-vous qu'il est au-dessus de l'image de fond */
 }
+
 #titre-header img {
   width: 1000px;
   height: 142px;
 }
 .photoHero {
+  position: relative;
   padding-bottom: 50px;
 }
 .galerie {
@@ -60,27 +68,27 @@ select {
   display: flex;
   justify-content: end;
 }
-option {
-  background-color: white;
-}
-option:nth-child(1) {
-  background: white;
-}
-option:nth-child(2) {
-  background: white;
-}
-option:nth-child(3) {
+/* Couleur de fond pour le filtre catégorie sélectionné */
+#category-filter.selected-category {
   background: #ffd6d6;
 }
-option:nth-child(4) {
+
+/* Couleur de fond pour le filtre format sélectionné */
+#format-filter.selected-format {
   background: #fe5858;
 }
-option:nth-child(5) {
+
+/* Couleur de fond pour le filtre date sélectionné */
+#date-filter.selected-date {
   background: #e00000;
 }
 
 .photo-hover-container {
   position: relative;
+}
+#photo-galerie .photo-hover-container {
+  position: relative;
+  height: 495px !important;
 }
 
 .photo-hover-overlay {
@@ -99,6 +107,7 @@ option:nth-child(5) {
 
 .photo-hover-container:hover .photo-hover-overlay {
   opacity: 1;
+  background: #00000099;
 }
 
 .photo-link img {
@@ -107,6 +116,11 @@ option:nth-child(5) {
   transition: transform 0.3s;
 }
 
+#photo-galerie .photo-link img {
+  height: 31px;
+  width: 46px;
+  transition: transform 0.3s;
+}
 .photo-hover-container:hover .photo-link img {
   transform: scale(1.2); /* effet de zoom léger au survol */
 }
@@ -134,7 +148,10 @@ img.icon-fullscreen {
   width: 30px;
   height: 30px;
 }
-
+#photo-galerie img.icon-fullscreen {
+  width: 30px;
+  height: 30px;
+}
 .photo-hover-container:hover .photo-title {
   display: block; /* Afficher le titre au survol de .photo-hover-container */
 }
@@ -147,7 +164,6 @@ img.icon-fullscreen {
   color: white;
   text-transform: uppercase;
   padding: 5px;
-
   font-size: 14px;
   font-weight: 500;
   max-width: 90%; /* Largeur maximale du titre pour éviter de déborder du conteneur de la photo */
@@ -155,6 +171,97 @@ img.icon-fullscreen {
   overflow: hidden;
   text-overflow: ellipsis; /* Ajoute des points de suspension si le texte déborde */
   z-index: 5;
+}
+.photo-hover-container:hover .photo-categorie {
+  display: block; /* Afficher le titre au survol de .photo-hover-container */
+}
+.photo-categorie {
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: white;
+  text-transform: uppercase;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 400;
+  max-width: 90%; /* Largeur maximale du titre pour éviter de déborder du conteneur de la photo */
+  white-space: nowrap; /* Empêche le texte de passer à la ligne */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Ajoute des points de suspension si le texte déborde */
+  z-index: 5;
+}
+
+/* Styles pour la lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2em;
+  color: white;
+  z-index: 1001;
+  user-select: none;
+}
+img.out {
+  position: absolute;
+  left: 90%;
+  top: 50px;
+  cursor: pointer;
+}
+.photo {
+  width: 564px;
+  height: 495px;
+  object-fit: cover;
+}
+/* Styles pour les flèches */
+.arrow {
+  cursor: pointer;
+  position: fixed; /* Positionnement fixe par rapport à la fenêtre */
+  top: 50%; /* Centrer verticalement */
+  transform: translateY(-50%);
+  font-size: 2em; /* Taille de la flèche */
+  color: white; /* Couleur de la flèche */
+  z-index: 1001; /* S'assurer qu'elles sont au-dessus de la lightbox */
+  user-select: none; /* Désactiver la sélection du texte */
+}
+
+.left-arrow {
+  left: 150px; /* Positionnement à gauche */
+}
+.left-arrow img {
+  width: 110px;
+  height: 18px;
+}
+.right-arrow {
+  right: 150px; /* Positionnement à droite */
+}
+.right-arrow img {
+  width: 110px;
+  height: 18px;
+}
+.info-container {
+  color: white;
+  position: absolute;
+  display: flex;
+  bottom: 150px;
+  text-transform: uppercase;
+}
+.info-ref {
+  padding-right: 440px;
 }
 
 /* responsive */

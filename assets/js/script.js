@@ -32,6 +32,7 @@ btn.addEventListener('click', function(){
 
 
 
+
 /*FILTRES*/
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -94,14 +95,12 @@ var btn2 = document.querySelector(".btn2");
 
 
 // When the user clicks on the button, open the modal
+
 var data = document.querySelector(".data-ref").innerText;
 var inputRef = document.querySelector("#ref-photo");
 btn2.addEventListener('click', function(){
   modal.style.display = "block";
   inputRef.setAttribute('value', data);
-  
-  
-  
 });
 
   var arrowLeft = document.querySelector("#left");
@@ -125,6 +124,6 @@ btn2.addEventListener('click', function(){
 
 
 
-  
+
 
 

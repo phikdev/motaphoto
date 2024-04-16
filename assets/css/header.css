@@ -38,6 +38,7 @@ li {
 #mobile ul {
   position: absolute;
   left: -10000px;
+  margin-top: 14px;
   font-size: 44px;
   font-weight: 400;
   text-transform: uppercase;
@@ -47,6 +48,7 @@ li {
   height: 100%;
   text-align: center;
   transition: 0.5s;
+  z-index: 1000;
 }
 #mobile li a {
   color: white;

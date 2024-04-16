@@ -44,7 +44,7 @@ $container = get_theme_mod('understrap_container_type');
 </div>
     
 
-<div class="galerie">
+<div id="CP" class="galerie">
 
     <div id="selectAll">
         <div id="select1">  
@@ -63,7 +63,7 @@ $container = get_theme_mod('understrap_container_type');
 						<option value="">CATEGORIES</option>
 						<?php
 							foreach ( $categories as $category ) :
-								?><option value="<?php echo $category->term_id ?>"><?php echo $category->name ?></option><?php
+								?><option id="option" value="<?php echo $category->term_id ?>"><?php echo $category->name ?></option><?php
 							endforeach;
 						?>
 					</select>
@@ -81,7 +81,7 @@ $container = get_theme_mod('understrap_container_type');
 			);
             if( $formats ) :
 				?>
-					<select class="formats" id="format-filter">
+					<select class="formats " id="format-filter">
 						<option value="">FORMATS</option>
 						<?php
 							foreach ( $formats as $category ) :
@@ -134,7 +134,7 @@ $container = get_theme_mod('understrap_container_type');
 </div>
 
 
-<button id="btnL" type="button">Toutes les photos</button>
+<button id="btnL" type="button">Charger plus</button>
 
 
 
@@ -146,4 +146,22 @@ $container = get_theme_mod('understrap_container_type');
 
 
 
+<!-- <script>document.addEventListener('DOMContentLoaded', function() {
+    var categoryFilter = document.getElementById('category-filter');
+    var formatFilter = document.getElementById('format-filter');
+    var dateFilter = document.getElementById('date-filter');
 
+    categoryFilter.addEventListener('change', function() {
+        this.classList.toggle('selected-category', this.selectedIndex !== 0);
+    });
+
+    formatFilter.addEventListener('change', function() {
+        this.classList.toggle('selected-format', this.selectedIndex !== 0);
+    });
+
+    dateFilter.addEventListener('change', function() {
+        this.classList.toggle('selected-date', this.selectedIndex !== 0);
+    });
+});
+
+</script> -->

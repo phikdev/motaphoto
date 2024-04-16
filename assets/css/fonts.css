@@ -1,11 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Mono&family=Syne&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Space+Mono&family=Syne&display=swap");
-li {
+li,
+.photo-categorie,
+.lightbox-arrow.left-arrow,
+.lightbox-arrow.right-arrow {
   font-family: "Space Mono", monospace;
 }
 form,
 select,
-.photo-title,
-.photo-category {
+.photo-title {
   font-family: "Poppins", sans-serif;
+}
+.lightbox-arrow.left-arrow,
+.lightbox-arrow.right-arrow {
+  font-weight: 400;
+  font-size: 12px;
 }
