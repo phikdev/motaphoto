@@ -53,6 +53,9 @@ li {
 #mobile li a {
   color: white;
 }
+#mobile li.myBtn {
+  color: white;
+}
 #first {
   padding-top: 150px;
 }

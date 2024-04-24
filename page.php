@@ -146,22 +146,4 @@ $container = get_theme_mod('understrap_container_type');
 
 
 
-<!-- <script>document.addEventListener('DOMContentLoaded', function() {
-    var categoryFilter = document.getElementById('category-filter');
-    var formatFilter = document.getElementById('format-filter');
-    var dateFilter = document.getElementById('date-filter');
 
-    categoryFilter.addEventListener('change', function() {
-        this.classList.toggle('selected-category', this.selectedIndex !== 0);
-    });
-
-    formatFilter.addEventListener('change', function() {
-        this.classList.toggle('selected-format', this.selectedIndex !== 0);
-    });
-
-    dateFilter.addEventListener('change', function() {
-        this.classList.toggle('selected-date', this.selectedIndex !== 0);
-    });
-});
-
-</script> -->
