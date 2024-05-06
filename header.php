@@ -22,12 +22,12 @@
 ?>
 
 <div id="mobile">
-<?php wp_nav_menu([
-   'theme_location' => 'header',
-   'container' => false,
-   'menu_class' => 'navbar-nav'
-])
-?>
+    <?php wp_nav_menu([
+    'theme_location' => 'header',
+    'container' => false,
+    'menu_class' => 'navbar-nav'
+    ])
+    ?>
 
 </div>
 </nav>

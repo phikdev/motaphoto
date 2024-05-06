@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.icon-fullscreen').forEach(function(link, index) {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                console.log('coucou');
                 currentIndex = index; // Mettre à jour currentIndex
                 showImage(index); // Afficher l'image correspondante dans la lightbox
             });

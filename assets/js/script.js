@@ -94,7 +94,7 @@ window.onclick = function(event) {
 var btn2 = document.querySelector(".btn2");
 
 
-// When the user clicks on the button, open the modal
+
 
 var data = document.querySelector(".data-ref").innerText;
 var inputRef = document.querySelector("#ref-photo");
