@@ -184,7 +184,7 @@ a {
   }
   #ref {
     width: 425px;
-    top: 500px;
+    top: 480px;
   }
   #titre {
     font-size: 46px;
@@ -196,7 +196,7 @@ a {
   }
   #trait {
     width: 425px;
-    margin-top: 400px;
+    margin-top: 500px;
   }
   #suggestion {
     display: flex;
